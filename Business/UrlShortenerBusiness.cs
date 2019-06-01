@@ -14,30 +14,31 @@ namespace Business
         public Url GenerateShortUrl(Url url)
         {
             var randomUrl =Generator.RandomURL.GetURL();
-            var result = unitOfWork.UrlRepository.Get(x => x.LongUrl == url.LongUrl && !x.IsActive).FirstOrDefault();
-            if (result == null)
+            var resultShortUrl = unitOfWork.UrlRepository.Get(x => x.ShortUrl == randomUrl && x.IsActive);
+            while (resultShortUrl.Count() > 0)
             {
-                var resultShortUrl = unitOfWork.UrlRepository.Get(x => x.ShortUrl == randomUrl && x.IsActive);
-                while (resultShortUrl.Count() > 0)
-                {
-                    randomUrl = Generator.RandomURL.GetURL();
-                    resultShortUrl = unitOfWork.UrlRepository.Get(x => x.ShortUrl == randomUrl && x.IsActive);
-                    if (resultShortUrl.Count() == 0)
-                        break;
-                }
+                randomUrl = Generator.RandomURL.GetURL();
+                resultShortUrl = unitOfWork.UrlRepository.Get(x => x.ShortUrl == randomUrl && x.IsActive);
+                if (resultShortUrl.Count() == 0)
+                    break;
+            }
 
-                url.ShortUrl = randomUrl;
-                url.CreateDateTime = DateTime.UtcNow.ToFaString("yyyy/MM/dd hh:mm:ss");
-                unitOfWork.UrlRepository.Insert(url);
-                unitOfWork.Save();
-            }
-            else
-            {
-                url = result;
-            }
+            url.ShortUrl += randomUrl;
+            url.CreateDateTime = DateTime.UtcNow.ToFaString("yyyy/MM/dd hh:mm:ss");
+            url.Key = randomUrl;
+            url.IsActive = true;
+            unitOfWork.UrlRepository.Insert(url);
+            unitOfWork.Save();
             return url;
         }
 
-
+        public string GetLongUrl(string shortUrl)
+        {
+            var result = unitOfWork.UrlRepository.Get(x => x.Key == shortUrl && x.IsActive).FirstOrDefault();
+            if (result == null)
+                return "";
+            else
+                return result.LongUrl;
+        }
     }
 }

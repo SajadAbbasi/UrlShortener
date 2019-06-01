@@ -15,9 +15,9 @@ namespace WebApplication
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "UrlShortenerApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                name: "Api",
+                routeTemplate: "{key}",
+                defaults: new { controller = "UrlShortenerApi", action = "Get" }
             );
         }
     }

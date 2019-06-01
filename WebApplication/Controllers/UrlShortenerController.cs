@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Business;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -13,17 +14,20 @@ namespace WebApplication.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(new Url());
+            return View(new Models.UrlViewModel());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Generate(Url url)
+        public JsonResult Generate(UrlViewModel url)
         {
             if (ModelState.IsValid)
             {
+                var urlModel = new Url();
+                urlModel.LongUrl = url.LongUrl;
+                urlModel.ShortUrl = Request.Url.Scheme + "://" + Request.Url.Authority+"/";
                 var business = new UrlShortenerBusiness();
-                var result = business.GenerateShortUrl(url);
+                var result = business.GenerateShortUrl(urlModel);
                 return Json(result);
             }
             else

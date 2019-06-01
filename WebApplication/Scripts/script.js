@@ -11,7 +11,8 @@
             __RequestVerificationToken: token
         },
         success: function (response) {
-            $('#ShortUrl').val(response.ShortUrl);
+            $('#ShortUrl').text(response.ShortUrl);
+            $("#ShortUrl").attr("href", response.ShortUrl)
         }
     });
     return false;

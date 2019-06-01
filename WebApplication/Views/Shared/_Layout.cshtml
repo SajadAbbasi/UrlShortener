@@ -16,12 +16,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "UrlShortener", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("کوتاه کننده آدرس سایت", "Index", "UrlShortener", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "UrlShortener", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "UrlShortenerAPI", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("خانه", "Index", "UrlShortener")</li>
                 </ul>
             </div>
         </div>
@@ -35,7 +34,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/script")
-    @Scripts.Render("~/bundles/jqueryval")
 
     @RenderSection("scripts", required: false)
 </body>

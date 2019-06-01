@@ -4,36 +4,31 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Business;
 
 namespace WebApplication.Controllers
 {
     public class UrlShortenerApiController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+        [HttpGet]
+        public HttpResponseMessage Get([FromUri]string key)
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/values/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
+            try
+            {
+                var business = new UrlShortenerBusiness();
+                var longUrl = business.GetLongUrl(key);
+                var response = Request.CreateResponse(HttpStatusCode.Moved);
+                if (Uri.IsWellFormedUriString(longUrl, UriKind.Absolute))
+                    response.Headers.Location = new Uri(longUrl);
+                else
+                    response.Headers.Location = new Uri("http://" + longUrl);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                var response = Request.CreateResponse(HttpStatusCode.NoContent);
+                return response;
+            }
         }
     }
 }

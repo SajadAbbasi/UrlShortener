@@ -49,6 +49,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity.cs" />
+    <Compile Include="Migrations\201906011745400_InitialCreate.cs" />
+    <Compile Include="Migrations\201906011745400_InitialCreate.Designer.cs">
+      <DependentUpon>201906011745400_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906011954079_Initial.cs" />
+    <Compile Include="Migrations\201906011954079_Initial.Designer.cs">
+      <DependentUpon>201906011954079_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906012102545_Initial1.cs" />
+    <Compile Include="Migrations\201906012102545_Initial1.Designer.cs">
+      <DependentUpon>201906012102545_Initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +73,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201906011745400_InitialCreate.resx">
+      <DependentUpon>201906011745400_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906011954079_Initial.resx">
+      <DependentUpon>201906011954079_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906012102545_Initial1.resx">
+      <DependentUpon>201906012102545_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
