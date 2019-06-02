@@ -3,7 +3,7 @@
     var token = $('input[name="__RequestVerificationToken"]', form).val();
     var url = new Object();
     url.LongUrl = $('#LongUrl').val();
-    if ($('#LongUrl').val()) {
+    if (isURL($('#LongUrl').val())) {
         $.ajax({
             url: "/UrlShortener/Generate",
             type: 'POST',

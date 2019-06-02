@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Utils\PersianDateExtensionMethods.cs" />
+    <Compile Include="Utils\PersianDate.cs" />
     <Compile Include="Utils\RandomUrl.cs" />
     <Compile Include="Respository\GenericRepository.cs" />
     <Compile Include="Respository\IGenericRepository.cs" />

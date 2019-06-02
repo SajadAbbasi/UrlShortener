@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace System
 {
-    public static class PersianDateExtensionMethods
+    public static class PersianDate
     {
         private static CultureInfo _Culture;
         public static CultureInfo GetPersianCulture()

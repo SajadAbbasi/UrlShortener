@@ -14,7 +14,7 @@ namespace WebApplication.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(new Models.UrlViewModel());
+            return View(new UrlViewModel());
         }
 
         [HttpPost]

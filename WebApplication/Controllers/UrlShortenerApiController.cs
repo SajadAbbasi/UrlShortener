@@ -17,6 +17,10 @@ namespace WebApplication.Controllers
             {
                 var business = new UrlShortenerBusiness();
                 var longUrl = business.GetLongUrl(key);
+                if(string.IsNullOrEmpty(longUrl))
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
                 var response = Request.CreateResponse(HttpStatusCode.Moved);
                 if (Uri.IsWellFormedUriString(longUrl, UriKind.Absolute))
                     response.Headers.Location = new Uri(longUrl);
@@ -24,10 +28,9 @@ namespace WebApplication.Controllers
                     response.Headers.Location = new Uri("http://" + longUrl);
                 return response;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                var response = Request.CreateResponse(HttpStatusCode.NoContent);
-                return response;
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
         }
     }
